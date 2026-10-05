@@ -1,0 +1,265 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-display);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Travel palette */
+  --color-sand: var(--sand);
+  --color-sand-deep: var(--sand-deep);
+  --color-teal: var(--teal);
+  --color-teal-deep: var(--teal-deep);
+  --color-teal-soft: var(--teal-soft);
+  --color-marigold: var(--marigold);
+  --color-marigold-soft: var(--marigold-soft);
+  --color-coral: var(--coral);
+  --color-coral-soft: var(--coral-soft);
+  --color-leaf: var(--leaf);
+  --color-leaf-soft: var(--leaf-soft);
+  --color-ink: var(--ink);
+  --color-sky: var(--sky);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-soft: 0 1px 2px rgb(31 42 55 / 0.04), 0 10px 30px -14px rgb(31 42 55 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(31 42 55 / 0.05), 0 18px 40px -16px rgb(31 42 55 / 0.25);
+
+  --animate-draw: draw 2.4s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes draw {
+    0% { stroke-dashoffset: 240; }
+    60%, 100% { stroke-dashoffset: 0; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+}
+
+/* Light mode only: Wander Mind is a sunny-day app. */
+:root {
+  color-scheme: light;
+
+  --sand: oklch(0.983 0.008 82);
+  --sand-deep: oklch(0.948 0.018 80);
+  --teal: oklch(0.53 0.092 205);
+  --teal-deep: oklch(0.4 0.075 210);
+  --teal-soft: oklch(0.955 0.025 200);
+  --marigold: oklch(0.82 0.15 78);
+  --marigold-soft: oklch(0.965 0.045 85);
+  --coral: oklch(0.69 0.155 36);
+  --coral-soft: oklch(0.96 0.03 40);
+  --leaf: oklch(0.58 0.12 155);
+  --leaf-soft: oklch(0.96 0.035 155);
+  --ink: oklch(0.27 0.03 255);
+  --sky: oklch(0.95 0.03 215);
+
+  --background: var(--sand);
+  --foreground: var(--ink);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--teal);
+  --primary-foreground: oklch(0.99 0.005 200);
+  --secondary: var(--sand-deep);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.958 0.013 80);
+  --muted-foreground: oklch(0.5 0.02 255);
+  --accent: var(--teal-soft);
+  --accent-foreground: var(--teal-deep);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.905 0.017 80);
+  --input: oklch(0.89 0.018 80);
+  --ring: var(--teal);
+  --chart-1: var(--teal);
+  --chart-2: var(--marigold);
+  --chart-3: var(--coral);
+  --chart-4: var(--leaf);
+  --chart-5: oklch(0.62 0.09 280);
+  --radius: 0.9rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display), Georgia, serif;
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  ::selection {
+    background: var(--marigold-soft);
+  }
+}
+
+@layer components {
+  .card-soft {
+    @apply rounded-2xl border border-border/70 bg-card;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .kicker {
+    @apply text-[0.7rem] font-semibold tracking-[0.18em] text-coral uppercase;
+  }
+
+  /* Topographic contour lines - a quiet map texture for hero areas. */
+  .topo {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg fill='none' stroke='%230E7C86' stroke-opacity='0.07' stroke-width='1.2'%3E%3Cpath d='M-50 120c80-40 160 30 240 0s160-90 240-50 120 70 220 30'/%3E%3Cpath d='M-50 170c90-50 170 40 250 5s150-80 240-40 120 60 210 25'/%3E%3Cpath d='M-50 230c80-30 170 50 260 10s140-70 230-30 130 60 210 20'/%3E%3Cpath d='M-50 300c100-50 160 40 250 0s150-60 240-20 120 50 210 10'/%3E%3Cpath d='M-50 370c90-40 170 50 250 10s160-80 250-40 110 60 200 20'/%3E%3Cpath d='M-50 440c80-50 170 30 250 0s150-70 240-30 130 70 210 30'/%3E%3Cpath d='M-50 510c100-40 160 40 250 5s150-70 240-30 120 50 210 15'/%3E%3Ccircle cx='430' cy='150' r='40'/%3E%3Ccircle cx='430' cy='150' r='70'/%3E%3Ccircle cx='430' cy='150' r='100'/%3E%3Ccircle cx='140' cy='420' r='30'/%3E%3Ccircle cx='140' cy='420' r='58'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 600px 600px;
+  }
+
+  /* Ticket stub with perforated notches on both sides. */
+  .ticket {
+    --notch: 7px;
+    mask:
+      radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat;
+  }
+
+  /* Passport / postmark stamp used for evidence badges. */
+  .stamp {
+    @apply inline-flex items-center gap-1 rounded-md border-[1.5px] border-dashed px-1.5 py-0.5 text-[0.62rem] leading-none font-bold tracking-[0.08em] uppercase;
+    transform: rotate(-2.5deg);
+    box-shadow: inset 0 0 0 2px var(--card);
+    outline: 1.5px solid currentColor;
+    outline-offset: 1px;
+  }
+  .stamp-verified { @apply border-leaf/70 bg-leaf-soft text-leaf; }
+  .stamp-reported { @apply border-marigold bg-marigold-soft text-[oklch(0.55_0.12_70)]; }
+  .stamp-estimate { @apply border-muted-foreground/40 bg-muted text-muted-foreground; outline-color: transparent; }
+
+  .dashed-route {
+    background-image: linear-gradient(to bottom, var(--teal) 55%, transparent 0%);
+    background-size: 2px 10px;
+    background-repeat: repeat-y;
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+
+  .veg-dot, .nonveg-dot {
+    @apply inline-flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border-[1.5px];
+  }
+  .veg-dot { @apply border-leaf; }
+  .veg-dot::after { content: ""; @apply size-1.5 rounded-full bg-leaf; }
+  .nonveg-dot { @apply border-[oklch(0.5_0.13_35)]; }
+  .nonveg-dot::after {
+    content: "";
+    width: 0; height: 0;
+    border-left: 3.5px solid transparent;
+    border-right: 3.5px solid transparent;
+    border-bottom: 6px solid oklch(0.5 0.13 35);
+  }
+}
+
+/* Map pins (Leaflet divIcons): a numbered circle with a pointer, coloured by stop type via --pin. */
+.wm-pin {
+  position: relative;
+  width: 32px;
+  height: 42px;
+  transform-origin: bottom center;
+  transition: transform 0.2s ease;
+}
+.wm-pin span {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  border-radius: 9999px;
+  background: var(--pin);
+  color: white;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+}
+.wm-pin::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 11px;
+  height: 11px;
+  background: var(--pin);
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: translateX(-50%) rotate(45deg);
+}
+.wm-pin-active { transform: scale(1.25); }
+.wm-stay {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  border-radius: 9999px;
+  background: var(--ink);
+  color: white;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+}
+.leaflet-container { font-family: var(--font-sans), system-ui, sans-serif; }
+/* Calm the OSM palette so it sits with the sand/teal UI. */
+.leaflet-tile-pane { filter: saturate(0.7) brightness(1.04) sepia(0.06); }
+.leaflet-tooltip { border-radius: 8px; border: none; background: var(--ink); color: white; font-weight: 500; box-shadow: 0 4px 12px rgb(0 0 0 / 0.2); }
+.leaflet-tooltip-top::before { border-top-color: var(--ink); }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+  .card-soft { box-shadow: none; break-inside: avoid; }
+}
